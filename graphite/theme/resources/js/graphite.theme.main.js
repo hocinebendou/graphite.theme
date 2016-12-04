@@ -40,7 +40,8 @@ function GraphiteTheme() {
                                    'referencesamples',
                                    'supplyorders',
                                    'pricelists',
-                                   'invoices'
+                                   'invoices',
+                                   'kits',
                                    ],
                          },
         'Laboratory':   {'id': 'nav-setup',
@@ -110,6 +111,8 @@ function GraphiteTheme() {
                                  'bika_attachmenttypes',
                                  'bika_batchlabels',
                                  'bika_subgroups',
+                                 'bika_stockitems',
+                                 'bika_kittemplates',
                                 ],
                         },
         'Accounting':   {'id': 'nav-accounting',
@@ -221,7 +224,6 @@ function GraphiteTheme() {
 
         // Loads right column
         loadRightColumn();
-
         // Dynamic page load behavior to links
         $('#contentActionMenus #plone-contentmenu-workflow dt.actionMenuHeader a').attr('href', '#');
         $('#lims-nav li a').unbind("click");
@@ -848,8 +850,8 @@ function GraphiteTheme() {
      * Sets the left-nav item menu active for an url
      */
     function setActiveNavItem(url) {
-        console.log(url)
         var parturl = url.replace(window.portal_url, '');
+        //window.location.reload();
         if (navmenu_layout == 'left') {
             $('ul.navtree li a').each(function() {
                 var itemurl = $(this).attr('href');
@@ -1060,13 +1062,14 @@ function GraphiteTheme() {
     }
 
     /**
-     * Requests a page. If ajax supported, the page will be loaded
-     * using an ajax request via getPage method. Otherwise, the page
-     * will be redirected as usual.
+     * Requests a page. If ajax supported by the browser, the page will
+     * be loaded using an ajax request via getPage method. Otherwise,
+     * the page will be redirected as usual.
      */
     function requestPage(url, text) {
-        if (history.pushState) {
-            getPage(url, text);
+        // HOCINE: THE CONDITION OF THIS IF WAS "history.pushState"
+        if (false) {
+            getPage(url, text); // HOCINE: THE PROBLEM IS HERE. USING WEB CACHING NOT WORKING
         } else {
             /* Ajax navigation is not supported */
             location.assign(url);
@@ -1371,6 +1374,11 @@ function GraphiteTheme() {
 
         // Bika LIMS
         window.bika.lims.loadControllers(true);
+
+        // Bika SANBI. HOCINE: HERE WE LOAD JS FOR BIKA SANBI ESPECIALY FOR KIT ASSEMBLY
+        // WE ARE USING HER INITVIEW() MAY BE WE CAN USE INITILIZE(). PLEASE CHECK
+        // bika.sanbi.loader.js
+        window.bika.sanbi.initview();
 
         // Remove bika-spinner
         $(document).unbind("ajaxStart");

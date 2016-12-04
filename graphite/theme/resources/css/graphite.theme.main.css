@@ -1971,6 +1971,45 @@ table.manage_results_header th {
     font-weight: 300;
 }
 
+/*______________________________________________________________
+    THIS WRITTEN BY HOCINE FOR KIT ASSEMBLY
+  ______________________________________________________________
+*/
+.template-base_edit #content table.listing.kitassembly.add {
+    text-align: left;
+}
+.template-base_edit #content table.listing.kitassembly.add td {
+    padding: 0 15px 0 0;
+    vertical-align: middle;
+    background-color: transparent;
+}
+.template-base_edit #content table.listing.kitassembly.add th {
+    padding: 0;
+    vertical-align: middle;
+}
+.template-base_edit #content table.listing.kitassembly.add th label {
+    background-color: #efefef;
+    display: block;
+    font-weight: 400;
+    margin: 4px 8px 0 0;
+    padding: 3px 0 3px 10px;
+    border-left: 4px solid #ddd;
+}
+.template-base_edit #content table.listing.kitassembly.add th label em {
+    font-size: 0.9em;
+    font-weight: 300;
+    font-style: normal;
+}
+.template-base_edit #content table.listing.kitassembly.add td div.field {
+    margin: 0;
+}
+.template-base_edit #content table.listing.kitassembly.add tr[fieldname='description'] th label{
+    height: 100px;
+}
+/*______________________________________________________________
+    ENDS HERE
+  ______________________________________________________________
+*/
 .template-ar_add #content table.listing.analysisrequest.add {
     text-align: left;
 }
@@ -2048,6 +2087,39 @@ table.manage_results_header th {
     font-weight: bold;
 }
 
+/*______________________________________________________________
+    THIS WRITTEN BY HOCINE FOR KIT ASSEMBLY
+  ______________________________________________________________
+*/
+.template-base_edit #content input[type="submit"] {
+    background-color: #3B8686;
+    color: #FFFFFF;
+    font-family: 'Titillium web',Arial,Helvetica,Sans;
+    font-size: 1.1em;
+    font-weight: 300;
+    margin-right: 20px;
+    padding: 3px 15px 4px;
+    vertical-align: middle;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.template-base_edit #content input[type="submit"]:hover {
+    opacity:0.4;
+    filter:alpha(opacity=40);
+    -moz-opacity: 0.4;
+    -khtml-opacity: 0.4;
+    background-color: #3B8686;
+    color: #fff;
+    -webkit-transition: background 250ms ease-in;
+    -moz-transition: background 250ms ease-in;
+    -o-transition: background 250ms ease-in;
+    -ms-transition: background 250ms ease-in;
+    transition: background 250ms ease-in;
+}
+/*______________________________________________________________
+    ENDS HERE
+  ______________________________________________________________
+*/
 .template-ar_add #content input[type="submit"] {
     background-color: #3B8686;
     color: #FFFFFF;
