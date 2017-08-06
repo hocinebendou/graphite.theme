@@ -5,6 +5,7 @@ Paste*
 *egg-info*
 build/*
 dist/*
+.idea/*
 *.orig
 .DS_Store*
 Thumbs.db
