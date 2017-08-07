@@ -31,90 +31,59 @@ function GraphiteTheme() {
     var navmenu = {
         'Quick access': {'id':'nav-quick',
                          'items': ['clients',
-                                   'batches',
-                                   'analysisrequests',
-                                   'samples',
-                                   'worksheets',
-                                   'arimports',
-                                   'methods',
-                                   'referencesamples',
-                                   'supplyorders',
-                                   'pricelists',
-                                   'invoices',
+                                   'projects',
                                    'kits',
+                                   'shipments',
+                                   'biospecimens',
+                                   'analysisrequests',
+                                   'storage',
+                                   'worksheets'
                                    ],
                          },
         'Laboratory':   {'id': 'nav-setup',
-                         'items': ['bika_setup',
+                         'items': ['laboratory',
+                                   'bika_setup',
                                    'bika_labcontacts',
-                                   'bika_departments',
-                                   'bika_analysiscategories',
-                                   'bika_analysisprofiles',
-                                   'analysisrequests',
-                                   'bika_artemplates',
-                                   'bika_arpriorities',
-                                   'bika_analysisservices',
-                                   'bika_analysisspecs',
-                                   'arimports',
-                                   'arpiorities',
-                                   'batches',
-                                   'bika_calculations',
-                                   'methods',
-                                   'worksheets',
-                                   'worksheettemplates',
+                                   'bika_departments'
                                   ],
                          },
         'Workflow':     {'id': 'nav-workflow',
-                         'items': ['bika_analysiscategories',
-                                   'bika_analysisprofiles',
-                                   'analysisrequests',
-                                   'bika_artemplates',
+                         'items': ['analysisrequests',
+                                   'bika_analysisservices',
+                                   'bika_analysiscategories',
                                    'bika_arpriorities',
-                                   'analysisservices',
-                                   'analysisspecs',
-                                   'arimports',
-                                   'arpriorities',
-                                   'batches',
+                                   'bika_analysisspecs',
                                    'bika_calculations',
-                                   'methods',
-                                   'worksheets',
-                                   'worksheettemplates',
-                                   'bika_worksheettemplates',
+                                   'methods'
                                   ],
                         },
         'Samples':      {'id': 'nav-samples',
-                         'items': ['samples',
+                         'items': ['biospecimens',
                                  'bika_sampleconditions',
-                                 'bika_samplematrices',
-                                 'bika_samplepoints',
                                  'bika_sampletypes',
                                  'bika_samplingdeviations',
-                                 'bika_srtemplates',
-                                 'referencesamples',
-                                 'bika_referencedefinitions',
                                 ],
                         },
         'Management':   {'id': 'nav-management',
                          'items': [
-                                 'laboratory',
-                                 'clients',
-                                 'bika_instruments',
-                                 'bika_instrumenttypes',
-                                 'bika_containers',
-                                 'bika_containertypes',
+                                 'storage',
+                                 'kits',
+                                 'bika_storagetypes',
                                  'bika_products',
-                                 'bika_labproducts',
-                                 'bika_manufacturers',
-                                 'bika_preservations',
-                                 'bika_storagelocations',
-                                 'bika_suppliers',
-                                 'bika_attachmenttypes',
-                                 'bika_batchlabels',
-                                 'bika_subgroups',
-                                 'bika_stockitems',
                                  'bika_kittemplates',
+                                 'bika_labproducts',
+                                 'bika_suppliers',
+                                 'bika_stockitems'
                                 ],
                         },
+        'Instruments':  {'id': 'nav-instruments',
+                         'items': [
+                                 'bika_instruments',
+                                 'bika_instrumenttypes',
+                                 'bika_calculations',
+                                 'methods'
+                         ]
+        },
         'Accounting':   {'id': 'nav-accounting',
                          'items': ['invoices',
                                    'pricelists',
@@ -414,7 +383,7 @@ function GraphiteTheme() {
             .done(function(data) {
                 var htmldata = data;
                 var filled = false;
-                var grabbed = []
+                var grabbed = [];
                 htmldata = $(htmldata).find('#portal-column-one dl.portletNavigationTree').html();
                 $(htmldata).find('a').each(function() {
                     var href = $(this).attr('href');
@@ -442,6 +411,7 @@ function GraphiteTheme() {
                         grabbed.push(id);
                     });
                 }
+
                 // Find orphan menuitems and populate 'Others'
                 var registered = [];
                 for (var section in navmenu) {
@@ -460,7 +430,6 @@ function GraphiteTheme() {
                         navmenu['Other']['items'].push(key);
                     }
                 }
-
                 // Populate the nav-menu
                 var activedetected = false;
                 for (var section in navmenu) {
@@ -1375,10 +1344,10 @@ function GraphiteTheme() {
         // Bika LIMS
         window.bika.lims.loadControllers(true);
 
-        // Bika SANBI. HOCINE: HERE WE LOAD JS FOR BIKA SANBI ESPECIALY FOR KIT ASSEMBLY
+        // Baoabab LIMS. HOCINE: HERE WE LOAD JS FOR BAOBAB LIMS ESPECIALY FOR KIT ASSEMBLY
         // WE ARE USING HER INITVIEW() MAY BE WE CAN USE INITILIZE(). PLEASE CHECK
-        // bika.sanbi.loader.js
-        window.bika.sanbi.initview();
+        // baobab.lims.loader.js
+        window.baobab.lims.initview();
 
         // Remove bika-spinner
         $(document).unbind("ajaxStart");

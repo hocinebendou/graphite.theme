@@ -2006,6 +2006,16 @@ table.manage_results_header th {
 .template-base_edit #content table.listing.kitassembly.add tr[fieldname='description'] th label{
     height: 100px;
 }
+
+table, #content, dl, dl.portlet p, dl.portlet {
+    margin-bottom: 1em;
+}
+
+dl.collapsible {
+    border: 0.1em solid #8cacbb;
+    margin: 1em 0;
+    padding: 0;
+}
 /*______________________________________________________________
     ENDS HERE
   ______________________________________________________________
@@ -2668,7 +2678,7 @@ a.edit-button.referencewidget-edit-button:before {
 #content div.arresultsinterpretation-container .fieldTextFormat,
 #content div.arresultsinterpretation-container .mceButton.mce_image,
 #content div.arresultsinterpretation-container .mceButton.mce_code,
-#content div.arresultsinterpretation-container .mceButton.mce_save, {
+#content div.arresultsinterpretation-container .mceButton.mce_save {
     display:none;
 }
 .bika-listing-table td.interim input[type="text"]:-moz-read-only,
