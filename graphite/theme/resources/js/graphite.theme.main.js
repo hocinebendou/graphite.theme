@@ -35,9 +35,11 @@ function GraphiteTheme() {
                                    'kits',
                                    'shipments',
                                    'biospecimens',
+                                   'samplebatches',
                                    'analysisrequests',
                                    'storage',
-                                   'worksheets'
+                                   'worksheets',
+                                   'patients'
                                    ],
                          },
         'Laboratory':   {'id': 'nav-setup',
@@ -59,6 +61,7 @@ function GraphiteTheme() {
                         },
         'Samples':      {'id': 'nav-samples',
                          'items': ['biospecimens',
+                                   'samplebatches',
                                  'bika_sampleconditions',
                                  'bika_sampletypes',
                                  'bika_samplingdeviations',
