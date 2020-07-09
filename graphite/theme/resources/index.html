@@ -6,7 +6,7 @@
         <!--[if IE]>
             <link rel="stylesheet" media="screen" type="text/css" href="stylesheets/iefixes.css" />
         <![endif]-->
-
+        <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     </head>
     <body>
         <div id="wrap">
@@ -16,7 +16,12 @@
                     <div id="portal-tools-wrapper">
                         <ul id="portal-globalnav"></ul>
                         <div id="portal-personaltools-wrapper"></div>
-                        <div id="portal-searchbox"></div>
+                        <div id="portal-searchbox" style="color:green; font-size:1.5em; padding-right:4px">
+                            <i><ion-icon name="search" size="medium"></ion-icon></i>
+                            <i><ion-icon name="notifications" size="medium"></ion-icon></i>
+                            <i><ion-icon name="cart" size="medium"></ion-icon></i>
+                            <i><ion-icon name="settings" size="medium"></ion-icon></i>
+                        </div>
                         <div id="portal-theme">
                             <a href='/'>GT
                                 <span id='graphite-theme-status'>
