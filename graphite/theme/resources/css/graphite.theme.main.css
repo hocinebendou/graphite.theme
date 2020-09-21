@@ -511,7 +511,7 @@ font-size:1.1em;
     text-transform:lowercase;
 }
 a#portal-logo:hover {
-    text-shadow: 1px 1px 10px #fafafa;
+    text-shadow: 1px 1px 10px #BBDEFB;
     -webkit-transition: all 250ms ease-in;
     -moz-transition: all 250ms ease-in;
     -o-transition: all 250ms ease-in;
@@ -1270,7 +1270,7 @@ h2 a.context_action_link:hover,
 input.context_action_link:hover,
 a.ws-analyses-search-button:hover,
 input.applytemplate:hover {
-    background-color: #fafafa;
+    background-color: #BBDEFB;
     border: 1px solid #ccc;
     transition: background 250ms ease-in 0s;
     transition: background 250ms ease-in;

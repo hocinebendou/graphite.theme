@@ -29,79 +29,59 @@ function GraphiteTheme() {
 
     // Navigation menu sections
     var navmenu = {
-        'Quick access': {'id':'nav-quick',
-                         'items': ['clients',
-                                   'projects',
-                                   'kits',
-                                   'shipments',
+        'Dashboard': {'id': 'nav-dashboard',
+                      'items': [],
+                      'links': ['bika-dashboard'],
+                         },
+        'Client': {'id':'nav-quick',
+                   'items': ['clients',
+                             'projects',
+                             ],
+                    'links': []
+                         },
+        'Collection':   {'id': 'nav-collectionrequest',
+                         'items': ['collection_requests',],
+                         'links': []
+                         },
+
+
+
+        'Reception':     {'id': 'nav-reception',
+                         'items': [
+                                   'transports',
                                    'biospecimens',
-                                   'samplebatches',
-                                   'analysisrequests',
-                                   'storage',
-                                   'worksheets',
-                                   'patients'
-                                   ],
-                         },
-        'Laboratory':   {'id': 'nav-setup',
-                         'items': ['laboratory',
-                                   'bika_setup',
-                                   'bika_labcontacts',
-                                   'bika_departments'
+                                   'samplebatches',                                 
                                   ],
-                         },
-        'Workflow':     {'id': 'nav-workflow',
-                         'items': ['analysisrequests',
-                                   'bika_analysisservices',
-                                   'bika_analysiscategories',
-                                   'bika_arpriorities',
-                                   'bika_analysisspecs',
-                                   'bika_calculations',
-                                   'methods'
-                                  ],
+                        'links': []
                         },
-        'Samples':      {'id': 'nav-samples',
-                         'items': ['biospecimens',
-                                   'samplebatches',
-                                 'bika_sampleconditions',
-                                 'bika_sampletypes',
-                                 'bika_samplingdeviations',
-                                ],
-                        },
-        'Management':   {'id': 'nav-management',
+        'Preparation':  {'id': 'nav-prep',
                          'items': [
-                                 'storage',
-                                 'kits',
-                                 'bika_storagetypes',
-                                 'bika_products',
-                                 'bika_kittemplates',
-                                 'bika_labproducts',
-                                 'bika_suppliers',
-                                 'bika_stockitems'
+                             'aliquots',
+                             'polls',
+                             'centrifuges',
+                             'bika_malditofs',
+                             'cultures',
+                             'analysisrequests',
                                 ],
+                        'links': []
                         },
-        'Instruments':  {'id': 'nav-instruments',
-                         'items': [
-                                 'bika_instruments',
-                                 'bika_instrumenttypes',
-                                 'bika_calculations',
-                                 'methods'
-                         ]
+        'Storage':   {'id': 'nav-storage',
+                      'items': ['storage',],
+                      'links': []
+                        },
+        'Sample shipment':  {'id': 'nav-shipment',
+                             'items': ['sample_shipment',],
+                             'links': []
         },
-        'Accounting':   {'id': 'nav-accounting',
-                         'items': ['invoices',
-                                   'pricelists',
-                                   'supplyorders'
-                                ],
+        'Reports':   {'id': 'nav-accounting',
+                      'items': ['bika_resultvalidations',],
+                      'links': ['reports']
                         },
-        'Tools':        {'id': 'nav-tools',
-                         'items': ['reports',
-                                   'import'
-                                ],
-                        },
-        'Other':        {'id': 'nav-other',
-                        'items': [
-                                 ],
-                        },
+        'Tools': {'id': 'nav-tools',
+                  'items': [],
+                  'links': []
+        },
+        
     };
 
 
@@ -219,6 +199,7 @@ function GraphiteTheme() {
         });
 
         $('.column-center').mouseenter(function() {
+            alert('add plain');
             if ($('#contextual-menu-wrapper').is(':visible')) {
                 $('#lims-nav li.selected').removeClass('selected').addClass('plain');
                 $('#contextual-menu-wrapper').hide();
@@ -278,6 +259,7 @@ function GraphiteTheme() {
      * javascript purge and reload.
      */
     function loadPartial() {
+        alert('Load Partial')
         loadBreadcrumbs();
         $('#contentActionMenus #plone-contentmenu-workflow dt.actionMenuHeader a').attr('href', '#');
         $('.column-center a').each(function(i) {
@@ -437,6 +419,7 @@ function GraphiteTheme() {
                 var activedetected = false;
                 for (var section in navmenu) {
                     var items = navmenu[section]['items'];
+                    var links = navmenu[section]['links'];
                     $.each(items, function(i, item) {
                         if (item in runtimenav) {
                             var runitem = runtimenav[item];
@@ -463,17 +446,66 @@ function GraphiteTheme() {
                             itemli += runitem[1]+'</a></li>';
                             var sectionid = navmenu[section]['id']
                             var sectionul = null;
+                            
                             if ($('#portal-tools-wrapper ul#lims-nav li.'+sectionid).length < 1) {
-                                var sectionli = '<li class="plain '+sectionid+'"><a href="#" data-section="'+sectionid+'">'+_b(section)+'</a></li>';
+                                if (items.length == 1 && links.length === 0){
+                                    var sectionli = '<li class="plain '+sectionid+'"><a href="'+portal_url+'/'+item+'" data-section="'+sectionid+'">'+_b(section)+'</a></li>';
+                                }else{
+                                    var sectionli = '<li class="plain '+sectionid+'"><a href="#" data-section="'+sectionid+'">'+_b(section)+'</a></li>';
+                                }
                                 var contextmenu = '<ul class="'+sectionid+' hidden" data-section="'+sectionid+'">'+itemli+'</ul>';
                                 $('#portal-tools-wrapper ul#lims-nav').append(sectionli);
                                 $('#contextual-menu-wrapper').append(contextmenu);
+                                // alert($('#portal-tools-wrapper ul#lims-nav li.'+sectionid).length  +sectionid+item);
                             } else {
                                 $('#contextual-menu-wrapper ul.'+sectionid).append(itemli);
                             }
                             $('#portal-nav-1 li.section-'+item).remove();
                         }
                     });
+
+                    // start link
+                    var links = navmenu[section]['links'] || [];
+                    $.each(links, function(i, item) {
+                        // var runitem = runtimenav[item];
+                        var active = !activedetected && currsectionid.indexOf('/'+item) > -1;
+                        var cssclass = ' class="'+item;
+                        if (active) {
+                            cssclass += " active";
+                            activedetected = true;
+                        }
+                        var aclass = 'class="'+ item+'"';
+                        /* if (runitem[3] !== undefined) {
+                            // We only need the contentype-xx class
+                            try {
+                                var re = /contenttype-.+/g;
+                                var matches = runitem[3].match(re);
+                                if (matches && matches.length > 0) {
+                                    aclass = 'class="'+matches[0]+'"';
+                                }
+                            } catch (e) {}
+                        }*/
+                        cssclass += '"';
+                        var itemli = '<li'+cssclass+'><a '+aclass+' href="'+portal_url+'/'+item+'">';
+                        // itemli += runitem[2] != '' ? '<img src="'+runitem[2]+'">' : '';
+                        itemli += section+'</a></li>';
+                        var sectionid = navmenu[section]['id']
+                        var sectionul = null;
+                        
+                        if ($('#portal-tools-wrapper ul#lims-nav li.'+sectionid).length < 1) {
+                            var sectionli = '<li class="plain '+sectionid+'"><a href="'+portal_url+'/'+item+'"' +'data-section="'+sectionid+'">'+_b(section)+'</a></li>';
+                            var contextmenu = '<ul class="'+sectionid+' hidden" data-section="'+sectionid+'">'+itemli+'</ul>';
+                            $('#portal-tools-wrapper ul#lims-nav').append(sectionli);
+                            $('#contextual-menu-wrapper').append(contextmenu);
+                            //
+                        } else {
+                            $('#contextual-menu-wrapper ul.'+sectionid).append(itemli);
+                        }
+                        $('#portal-nav-1 li.section-'+item).remove();
+                        
+                    });
+
+                    // end link
                 }
             })
             .always(function() {
@@ -621,23 +653,28 @@ function GraphiteTheme() {
      */
     function loadTopNavMenuTransitions() {
         $('#portal-tools-wrapper ul#lims-nav li a').click(function(e) {
-            e.preventDefault();
-            var section = $(this).attr('data-section');
-            $('#contextual-menu-wrapper').show();
-            $('#contextual-menu-wrapper ul.active').hide().removeClass('active');
-            $('#contextual-menu-wrapper ul.'+section).show().addClass('active');
-            $('#portal-tools-wrapper ul#lims-nav li.selected').removeClass('selected').addClass('plain');
-            $(this).closest('li').addClass('selected').remove('plain');
-            var height = $('#lims-nav-wrapper').innerHeight() + $('#logo').innerHeight() + 5;
-            $('#content-wrapper').animate({'margin-top': height+'px'}, 'fast');
+            if ($(this).attr('href')!=="#"){
+                console.log('going to the link')
+
+            }else{
+                e.preventDefault();
+                var section = $(this).attr('data-section');
+                $('#contextual-menu-wrapper').show();
+                $('#contextual-menu-wrapper ul.active').hide().removeClass('active');
+                $('#contextual-menu-wrapper ul.'+section).show().addClass('active');
+                $('#portal-tools-wrapper ul#lims-nav li.selected').removeClass('selected').addClass('plain');
+                $(this).closest('li').addClass('selected').remove('plain');
+                var height = $('#lims-nav-wrapper').innerHeight() + $('#logo').innerHeight() + 5;
+                $('#content-wrapper').animate({'margin-top': height+'px'}, 'fast');
+            }
         });
-        $('#portal-tools-wrapper ul#lims-nav li a').mouseenter(function(e) {
+        /*$('#portal-tools-wrapper ul#lims-nav li a').click(function(e) {
             var section = $(this).attr('data-section');
             if (!$('#contextual-menu-wrapper ul.'+section).hasClass('selected')) {
                 $(this).click();
             }
             ;
-        });
+        });*/
     }
 
     /**
@@ -845,6 +882,8 @@ function GraphiteTheme() {
             $('#contextual-menu-wrapper ul li').removeClass('active');
             $('#contextual-menu-wrapper ul.active li a').each(function() {
                 var itemurl = $(this).attr('href');
+                console.log('On this')
+                console.log(itemurl)
                 itemurl = itemurl.replace(window.portal_url, '');
                 if (parturl.contains(itemurl)) {
                     $(this).closest('li').addClass('active');
@@ -857,7 +896,10 @@ function GraphiteTheme() {
             if (!found) {
                 // No està obert, cal obrir el primer que tingui l'item
                 $('#contextual-menu-wrapper ul li a').each(function() {
-                    var itemurl = $(this).attr('href');
+                    var itemurl = $(this).attr('href') || '';
+                    console.log('The item')
+                    console.log(itemurl)
+                    console.log($(this))
                     itemurl = itemurl.replace(window.portal_url, '');
                     //---if (parturl.contains(itemurl))--- doesn't work on chrome
                     if (parturl.indexOf(itemurl) != -1){
@@ -1010,6 +1052,7 @@ function GraphiteTheme() {
      * behavior of the link
      */
     function processLink () {
+        alert('In process link')
         var url = $(this).attr('href');
         var omit = false;
         $.each(omitajaxrequests, function(i, item) {
@@ -1019,6 +1062,7 @@ function GraphiteTheme() {
             }
         });
         if (!omit) {
+            alert('not omit')
             $('#lims-nav li a').each(function() {
                 if (url.lastIndexOf($(this).attr('href'), 0) === 0) {
                     $(this).parent('li').removeClass('plain').addClass('selected');
@@ -1027,6 +1071,7 @@ function GraphiteTheme() {
                 }
             });
             $('#portal-globalnav li.selected').removeClass('selected').addClass('plain');
+            alert('about to request page');
             requestPage(this.href, $(this).html());
             return false;
         }
@@ -1041,8 +1086,10 @@ function GraphiteTheme() {
     function requestPage(url, text) {
         // HOCINE: THE CONDITION OF THIS IF WAS "history.pushState"
         if (false) {
+            alert('about to get page');
             getPage(url, text); // HOCINE: THE PROBLEM IS HERE. USING WEB CACHING NOT WORKING
         } else {
+            alert('location assign');
             /* Ajax navigation is not supported */
             location.assign(url);
         }
@@ -1256,7 +1303,7 @@ function GraphiteTheme() {
                   'calendar_formfield.js',
                   'formUnload.js',
                   'formsubmithelpers.js',
-                  'datetimewidget.js'
+                  'datetimewidget.js',
                   //'jquery-timepicker.js'
                   ];
 
