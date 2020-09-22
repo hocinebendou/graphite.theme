@@ -50,7 +50,8 @@ function GraphiteTheme() {
                          'items': [
                                    'transports',
                                    'biospecimens',
-                                   'samplebatches',                                 
+                                   'samplebatches',
+                                   'donors'                                 
                                   ],
                         'links': []
                         },
@@ -103,6 +104,11 @@ function GraphiteTheme() {
     // The current loaded 'section'.
     var currsectionid = window.location.href.replace(window.portal_url, '');
 
+    // Hide Administration on navigation tab if not manager
+    var is_admin = false
+    if ($('body').hasClass('userrole-manager')) {
+        is_admin = true
+    }
     // Top offset for positioning the contents
     var topoffset = 0;
 
@@ -337,17 +343,6 @@ function GraphiteTheme() {
         // Anonymous access.. we'll not categorize the nav items.
         // Retrieve the menus from the nav-bar
         if ($("body.userrole-anonymous").length > 0) {
-            $('#portal-nav-1 li:not(.section-bika-lims) a').each(function() {
-                var href = $(this).attr('href');
-                var id = $(this).attr('href').split("/");
-                var img = $(this).find('img');
-                id = id[id.length-1];
-                runtimenav[id] = [$(this).attr('href'),
-                                  $(this).find('span').length ? $.trim($(this).find('span').html()) : $.trim($(this).html()),
-                                  $(this).find('img').length ? $(this).find('img').attr('src') : ""];
-                var sectionli = '<li class="plain '+id+'"><a href="'+$(this).attr('href')+'" data-section="'+id+'">'+runtimenav[id][1]+'</a></li>';
-                $('#portal-tools-wrapper ul#portal-globalnav').append(sectionli);
-            });
             loadBreadcrumbs();
             $('#portal-globalnav').fadeIn();
 
@@ -396,15 +391,17 @@ function GraphiteTheme() {
                         return;
                     });
                 }
-                if (!('Other' in navmenu)) {
-                    navmenu['Other'] = {'id': 'nav-other',
-                                        'items': []};
-                }
-                for (var key in runtimenav) {
-                    if (key != 'sitemap' && key!='Plone' && registered.indexOf(key) < 0) {
-                        navmenu['Other']['items'].push(key);
+                if (is_admin){
+                    if (!('Administration' in navmenu)) {
+                        navmenu['Administration'] = {'id': 'nav-other',
+                                            'items': []};
                     }
-                }
+                    for (var key in runtimenav) {
+                        if (key != 'sitemap' && key!='Plone' && registered.indexOf(key) < 0) {
+                            navmenu['Administration']['items'].push(key);
+                        }
+                    }
+                 }
                 // Populate the nav-menu
                 var activedetected = false;
                 for (var section in navmenu) {
@@ -506,20 +503,6 @@ function GraphiteTheme() {
                 }
                 $('#portal-tools-wrapper ul#portal-globalnav li[id^="portaltab-"]').each(function() {
                     $(this).detach().appendTo($('#contextual-menu-wrapper ul.tools'));
-                });
-
-                // Move all remaining items to the portal-globalnav
-                $('#portal-nav-1 li a').each(function() {
-                    var href = $(this).attr('href');
-                    var id = $(this).attr('href').split("/");
-                    var img = $(this).find('img');
-                    id = id[id.length-1];
-                    runtimenav[id] = [$(this).attr('href'),
-                                      $(this).find('span').length ? $.trim($(this).find('span').html()) : $.trim($(this).html()),
-                                      $(this).find('img').length ? $(this).find('img').attr('src') : ""];
-                    var cssclass = $(this).closest('li').hasClass('navTreeCurrentNode') ? 'selected' : 'plain';
-                    var sectionli = '<li class="'+cssclass+' '+id+'"><a href="'+$(this).attr('href')+'" data-section="'+id+'">'+runtimenav[id][1]+'</a></li>';
-                    $('#portal-tools-wrapper ul#portal-globalnav').append(sectionli);
                 });
 
                 loadActiveNavSection();

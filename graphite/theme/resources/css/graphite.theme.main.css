@@ -135,12 +135,9 @@ body.userrole-anonymous #content-wrapper .column-left {
 }
 #portal-globalnav li.selected a,
 #portal-globalnav li a:hover {
-    background-color: #222;
     color:#fff;
 }
-#portal-globalnav li.selected {
-    box-shadow: 0 1px 8px #666;
-}
+
 #portal-globalnav li a {
     color: #d1d1d1;
     padding: 10px 15px;
