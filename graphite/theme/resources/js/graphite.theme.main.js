@@ -198,15 +198,6 @@ function GraphiteTheme() {
             $(this).closest('dl').removeClass('activated').addClass('deactivated');
         });
 
-        $('.column-center').mouseenter(function() {
-            alert('add plain');
-            if ($('#contextual-menu-wrapper').is(':visible')) {
-                $('#lims-nav li.selected').removeClass('selected').addClass('plain');
-                $('#contextual-menu-wrapper').hide();
-                $('#content-wrapper').animate({'margin-top': 70}, 'fast');
-            }
-        });
-
         // Loads additional JS styling
         loadStyles();
 
@@ -259,7 +250,6 @@ function GraphiteTheme() {
      * javascript purge and reload.
      */
     function loadPartial() {
-        alert('Load Partial')
         loadBreadcrumbs();
         $('#contentActionMenus #plone-contentmenu-workflow dt.actionMenuHeader a').attr('href', '#');
         $('.column-center a').each(function(i) {
@@ -456,7 +446,6 @@ function GraphiteTheme() {
                                 var contextmenu = '<ul class="'+sectionid+' hidden" data-section="'+sectionid+'">'+itemli+'</ul>';
                                 $('#portal-tools-wrapper ul#lims-nav').append(sectionli);
                                 $('#contextual-menu-wrapper').append(contextmenu);
-                                // alert($('#portal-tools-wrapper ul#lims-nav li.'+sectionid).length  +sectionid+item);
                             } else {
                                 $('#contextual-menu-wrapper ul.'+sectionid).append(itemli);
                             }
@@ -668,13 +657,6 @@ function GraphiteTheme() {
                 $('#content-wrapper').animate({'margin-top': height+'px'}, 'fast');
             }
         });
-        /*$('#portal-tools-wrapper ul#lims-nav li a').click(function(e) {
-            var section = $(this).attr('data-section');
-            if (!$('#contextual-menu-wrapper ul.'+section).hasClass('selected')) {
-                $(this).click();
-            }
-            ;
-        });*/
     }
 
     /**
@@ -905,7 +887,7 @@ function GraphiteTheme() {
                     if (parturl.indexOf(itemurl) != -1){
                         $(this).closest('li').addClass('active');
                         var sectionid = $(this).closest('ul').attr('data-section');
-                       // $('#lims-nav li.'+sectionid+' a').click();
+                       $('#lims-nav li.'+sectionid).addClass('selected').removeClass('plain');
                         found = true;
                         return false;
                     }
@@ -913,6 +895,7 @@ function GraphiteTheme() {
             }
             if (!found) {
                 // By default, Quick access
+                $('#lims-nav li.nav-dashboard').addClass('selected').removeClass('plain');
                 //$('#lims-nav li.nav-quick a').click();
             }
         }
@@ -1052,7 +1035,6 @@ function GraphiteTheme() {
      * behavior of the link
      */
     function processLink () {
-        alert('In process link')
         var url = $(this).attr('href');
         var omit = false;
         $.each(omitajaxrequests, function(i, item) {
@@ -1062,7 +1044,6 @@ function GraphiteTheme() {
             }
         });
         if (!omit) {
-            alert('not omit')
             $('#lims-nav li a').each(function() {
                 if (url.lastIndexOf($(this).attr('href'), 0) === 0) {
                     $(this).parent('li').removeClass('plain').addClass('selected');
@@ -1071,7 +1052,6 @@ function GraphiteTheme() {
                 }
             });
             $('#portal-globalnav li.selected').removeClass('selected').addClass('plain');
-            alert('about to request page');
             requestPage(this.href, $(this).html());
             return false;
         }
@@ -1086,10 +1066,8 @@ function GraphiteTheme() {
     function requestPage(url, text) {
         // HOCINE: THE CONDITION OF THIS IF WAS "history.pushState"
         if (false) {
-            alert('about to get page');
             getPage(url, text); // HOCINE: THE PROBLEM IS HERE. USING WEB CACHING NOT WORKING
         } else {
-            alert('location assign');
             /* Ajax navigation is not supported */
             location.assign(url);
         }
