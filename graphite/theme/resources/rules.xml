@@ -72,11 +72,13 @@
             <replace css:content-children='#portal-globalnav' css:theme-children='#portal-globalnav' />
 
             <!-- Portal Search box -->
-            <!-- <replace css:content-children='#portal-searchbox' css:theme-children='#portal-searchbox' /> -->
+            <replace css:content-children='#portal-searchbox' css:theme-children='#portal-searchbox' />
+            <!--
             <after css:theme-children="#portal-searchbox">
                 <xsl:for-each css:select="#portal-searchbox">
                 </xsl:for-each>
             </after>
+            -->
             <!-- Portal Personal Tools Wrapper -->
             <replace css:content-children='#portal-personaltools-wrapper' css:theme-children='#portal-personaltools-wrapper' />
 
