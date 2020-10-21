@@ -71,7 +71,7 @@ div.overlay li.formTab a,
 
 #content h1,
 #content h2 {
-    font-weight: 300;
+    /*font-weight: 300;*/
 }
 
 body.userrole-anonymous #content-wrapper .column-left {
@@ -82,9 +82,9 @@ body.userrole-anonymous #content-wrapper .column-left {
 /* Portal global nav */
 #portal-globalnav {
     float: left;
-    margin: 0;
-    padding: 0;
-    margin-top: 5px;
+    /* margin: 0;*/
+    /* padding: 0; */
+    /* margin-top: 5px;*/
     text-align: left;
     display:none;
 }
@@ -110,14 +110,15 @@ body.userrole-anonymous #content-wrapper .column-left {
 }
 #portal-globalnav li a {
     color: #d1d1d1;
-    padding: 10px 15px;
+    /* padding: 10px 15px;*/
 }
 #portal-globalnav li {
     list-style-type: none;
     display: inline;
-    margin: 0;
+    /* margin: 0;
     padding: 0;
     padding: 10px 1px;
+    */
 }
 
 /* portal-tools-wrapper */
@@ -149,10 +150,10 @@ body.userrole-anonymous #content-wrapper .column-left {
     border: none;
 }
 #portal-searchbox input[type="text"] {
-    border: 1px solid #cdcdcd;
-    box-shadow: 0 0 2px 1px #333;
+    border: 1px solid #2196F3;
+    box-shadow: 0 0 2px 1px #2196F3;
     padding: 3px;
-    background-color: #ddd;
+    background-color: #2196F3;
     border-radius: 3px;
 }
 #portal-searchbox input[type="submit"]:hover {
@@ -465,7 +466,7 @@ div.constraint {
     position: fixed;
     right: 0;
     z-index: 2000;
-    height:20px;
+    /* height:20px; */
 }
 a#portal-logo {
     text-transform:uppercase;
@@ -2471,7 +2472,7 @@ div.column-left {
 #lims-nav li {
     display: inline;
     list-style-type: none;
-    padding: 6px 13px 5px;
+    padding: 6px 13px 7px;
 }
 #lims-nav li a {
     color: #444;

@@ -73,7 +73,6 @@
 
             <!-- Portal Search box -->
             <replace css:content-children='#portal-searchbox' css:theme-children='#portal-searchbox' />
-
             <!-- Portal Personal Tools Wrapper -->
             <replace css:content-children='#portal-personaltools-wrapper' css:theme-children='#portal-personaltools-wrapper' />
 
