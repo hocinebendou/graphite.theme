@@ -235,18 +235,6 @@ dl.error dd {
 /* @group Tabs */
 
 /* Color differences between the two tab types */
-#content ul.formTabs {
-    background-color: #ddd;
-    border: 0.3em solid #ddd;
-}
-#edit-bar {
-    background-color: #75ad0a;
-    border: 0.25em solid #75ad0a;
-    font-size: 80%;
-    min-height: 2em;
-    margin-bottom: 1em;
-    padding-top: 0.05em;
-}
 #content-views {
     float: left;
     background-color: #75ad0a;
@@ -259,7 +247,6 @@ dl.error dd {
 #edit-bar,
 #content ul.formTabs {
     display: block;
-    border-style: solid solid none solid;
     margin-left: 0;
     border-top-right-radius: 0.5em;
     border-top-left-radius: 0.5em;
