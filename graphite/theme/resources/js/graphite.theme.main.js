@@ -74,7 +74,7 @@ function GraphiteTheme() {
                                    'organisms',
                                    'collection_devices',
                                    'anatomical_materials',
-                                   'virus_samples',
+                                   'viral_genomic_analyses',
                                   ],
                          },
         'Management':   {'id': 'nav-management',
